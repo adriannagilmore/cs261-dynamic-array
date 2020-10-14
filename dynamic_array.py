@@ -69,6 +69,69 @@ class DynamicArray:
             self.numberOfElements -= 1
             self.next_index -= 1       
 
+    def insert(self, index, object):
+        self.newArray = np.array([object])
+        if index <= -1 or index > self.numberOfElements:
+            raise IndexError("Index out of range")
+        elif index == 0:
+            self.data = np.concatenate((self.newArray, self.data))
+            self.numberOfElements += 1
+            self.next_index += 1
+        elif index == self.numberOfElements:
+            self.data = np.concatenate((self.data, self.newArray))
+            self.numberOfElements += 1
+            self.next_index += 1
+        else:
+            self.part1 = self.data[0:index]
+            self.part2 = self.data[index:]
+            self.data = np.concatenate((self.part1, self.newArray, self.part2))
+            self.numberOfElements += 1
+            self.next_index += 1
+    
+    def is_full(self):
+        if self.numberOfElements == self.capacity:
+            return True
+        else:  
+            return False
+
+    def max(self):
+        self.max_num = 0
+        if self.numberOfElements == 0:
+            return None
+        else:
+            for element in self.data:
+                if element >= self.max_num:
+                    self.max_num = element
+            return self.max_num
+    
+    def min(self):
+        if self.numberOfElements == 0:
+            return None
+        else:
+            self.min_num = self.data[0]
+            for element in self.data:
+                if element <= self.min_num:
+                    self.min_num = element
+            return self.min_num
+
+    def sum(self):
+        self.sum = 0
+        if self.numberOfElements == 0:
+            return None
+        else:
+            for element in self.data:
+                self.sum += element
+            return self.sum
+
+    def linear_search(self, object):
+        self.index = 0
+        for element in self.data:
+            self.index += 1
+            if element == object:
+                return self.index
+            else:
+                return None
+
         
 
     
