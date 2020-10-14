@@ -123,6 +123,8 @@ class DynamicArray:
                 self.sum += element
             return self.sum
 
+    #could not check to see if this worked because it crashes my program
+    #when I try to run it. Same with binary search.
     def linear_search(self, object):
         self.index = 0
         for element in self.data:
@@ -131,6 +133,19 @@ class DynamicArray:
                 return self.index
             else:
                 return None
+
+    #not finished, but I think there is a better way than
+    #what I am trying to do here
+    #I don't how to make the splitting recusive.
+    def binary_search(self, object):
+        self.data = np.sort(self.data)
+        self.split1 = np.array_split(self.data,2)
+        self.leftSplit1 = split1[0]
+        self.rightSplit1 = split1[1]
+        if object < rightSplit1[0]:
+            self.split2 = np.array_split(leftSplit1, 2)
+        else: 
+            self.split2 = np.array_split(rightSplit1,2)
 
         
 
